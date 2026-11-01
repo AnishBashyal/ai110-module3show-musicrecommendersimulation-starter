@@ -2,60 +2,47 @@
 
 ## 1. Model Name  
 
-Give your model a short, descriptive name.  
-Example: **VibeFinder 1.0**  
+**TasteMatch 1.0**
 
 ---
 
 ## 2. Intended Use  
 
-Describe what your recommender is designed to do and who it is for. 
+**Goal / Task:** TasteMatch tries to suggest the top 5 songs from a small catalog that best fit one user's taste. It gives each song a score and a reason, then ranks them.
 
-Prompts:  
+**Intended use:** classroom project to learn how a simple recommender turns data into suggestions. It assumes the user can describe their taste with one favorite genre, one mood, an energy level, and whether they like acoustic music.
 
-- What kind of recommendations does it generate  
-- What assumptions does it make about the user  
-- Is this for real users or classroom exploration  
+**Not intended for:** real users or a real music app. It only knows 18 songs, it cant learn from what people actually listen to, and it shouldnt be used to decide what real artists get heard.
 
 ---
 
 ## 3. How the Model Works  
 
-Explain your scoring approach in simple language.  
+Every song gets points, then the songs are sorted from highest to lowest and the top 5 are shown.
 
-Prompts:  
+- Genre matches the user's favorite: +2.0
+- Mood matches: +1.0
+- Energy is close to what the user wants: up to +1.0 (closer = more points)
+- Acousticness fits what the user likes: up to +0.5
 
-- What features of each song are used (genre, energy, mood, etc.)  
-- What user preferences are considered  
-- How does the model turn those into a score  
-- What changes did you make from the starter logic  
-
-Avoid code here. Pretend you are explaining the idea to a friend who does not program.
+The best possible score is 4.5. Each song also shows its reasons, like "genre match (+2.0)", so you can see why it was picked. I changed the starter code by adding all of this, since the starter had no scoring at all.
 
 ---
 
 ## 4. Data  
 
-Describe the dataset the model uses.  
-
-Prompts:  
-
-- How many songs are in the catalog  
-- What genres or moods are represented  
-- Did you add or remove data  
-- Are there parts of musical taste missing in the dataset  
+- 18 songs in data/songs.csv (10 from the starter, 8 I added).
+- Each song has genre, mood, energy, tempo, valence, danceability and acousticness. Only genre, mood, energy and acousticness are used for scoring.
+- 15 genres and 14 moods, but 12 of the 15 genres have only one song. Lofi has 3.
+- Missing: lyrics, language, artist popularity, decade, and what other people listen to. The data is made up, so it doesnt reflect real music taste.
 
 ---
 
 ## 5. Strengths  
 
-Where does your system seem to work well  
-
-Prompts:  
-
-- User types for which it gives reasonable results  
-- Any patterns you think your scoring captures correctly  
-- Cases where the recommendations matched your intuition  
+- It works well when the user's genre and mood are in the catalog. Chill Lofi and Deep Intense Rock both got results that matched my gut feeling.
+- The reasons make it easy to see why a song ranked where it did.
+- Different profiles got clearly different lists, for example loud pop vs quiet lofi had no songs in common.
 
 ---
 
@@ -110,14 +97,9 @@ The system doesnt hear any music. It just gives points for matching labels and n
 
 ## 8. Future Work  
 
-Ideas for how you would improve the model next.  
-
-Prompts:  
-
-- Additional features or preferences  
-- Better ways to explain recommendations  
-- Improving diversity among the top results  
-- Handling more complex user tastes  
+- Let the user pick several genres and moods, not just one.
+- Count close moods as partly matching ("intense" and "aggressive"), so the metal song isnt beaten by a pop song.
+- Add a rule to mix up the top 5 (for example, not too many songs by the same artist or genre) and add more songs per genre.
 
 ---
 
