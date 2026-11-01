@@ -105,10 +105,10 @@ The system doesnt hear any music. It just gives points for matching labels and n
 
 ## 9. Personal Reflection  
 
-A few sentences about your experience.  
+**Biggest learning moment:** The data limits the system a lot. My scoring rules were simple, but with only 18 songs (and 12 of 15 genres having just one song) there werent many real choices, so the same few songs kept showing up. Gym Hero was in 5 out of 6 lists even when I turned genre off. A better formula wouldnt fix that, I would need more songs.
 
-Prompts:  
+**How AI helped, and when I double-checked it:** AI helped me build each step fast, like the scoring code, the test profiles and writing up the results. But I had to double-check it when it mixed up numbers and versions. It told me Gym Hero was in the top 2 for 4 profiles when it was really 3, and it mixed results from the experiment weights with the original weights. I asked it to redo the analysis and say which version each number came from, and the corrected numbers are the ones in my model card.
 
-- What you learned about recommender systems  
-- Something unexpected or interesting you discovered  
-- How this changed the way you think about music recommendation apps  
+**What surprised me:** Just adding up points felt like a real recommender. Chill Lofi gave three lofi songs, then ambient and jazz, and that matched what I would expect. It is only genre, mood, energy and acousticness, but the reasons next to each song made it feel like it understood the taste.
+
+**What I would try next:** Let a user pick more than one genre and mood, and add a rule that mixes up the top 5 so it doesnt repeat the same artist or genre too much. After that I would add more songs per genre.
