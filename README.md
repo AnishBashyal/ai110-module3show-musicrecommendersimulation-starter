@@ -10,7 +10,13 @@ It's content based, meaning it looks at the songs themselves. It reads the songs
 
 ## How The System Works
 
-Real apps like spotify and youtube mostly use two things. One is collaborative filtering, which looks at what other people with similar taste liked (likes, skips, playlists). The other is content based, which looks at the song itself (genre, mood, tempo, energy). My version is only content based, since I dont have any other users. It just compares a song's features to what one user says they like, and gives it a score.
+Real apps like spotify and youtube use a lot of data. They look at what you do (likes, skips, replays, playlists, listening history) and at the songs themselves (genre, mood, tempo, energy). There are two main ways to use it. Collaborative filtering says "people with a similar history liked this, so you might too". Content based says "this song's features are close to songs you like". My version is only content based, since I dont have any other users.
+
+How my version splits it up:
+
+- **Input data:** the songs in the csv and their features.
+- **User preferences:** one taste profile (favorite genre, favorite mood, target energy, likes acoustic).
+- **Ranking:** score every song against the profile, sort high to low, show the top K.
 
 My version cares most about genre, then mood, then how close the energy is. I also look at acousticness a little.
 
@@ -50,6 +56,7 @@ Flow: user prefs → loop over every song and score it → sort high to low → 
    python -m venv .venv
    source .venv/bin/activate      # Mac or Linux
    .venv\Scripts\activate         # Windows
+   ```
 
 2. Install dependencies
 
@@ -119,7 +126,7 @@ Top recommendations:
 
 ## Profile Test Outputs
 
-Top 5 for each test profile (`python -m src.main` runs all of them). The first three are normal profiles, the last three are adversarial ones made to try to trick the scoring.
+Top 5 for each test profile (`python -m src.main` runs all of them). The first three are normal profiles, the last three are adversarial ones made to try to trick the scoring. My comments comparing each pair of profiles are in section 7 of the [model card](model_card.md).
 
 ### High-Energy Pop
 
@@ -330,14 +337,13 @@ So the change was mostly just different, not more accurate. It helped happy pop 
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+- Tiny catalog: 18 songs, and 13 of the 15 genres have only one song, so the lists dont have much variety.
+- Energy gives points to every song, so a few high energy songs (Gym Hero, Storm Runner) show up for almost everyone. Gym Hero was in 5 of 6 test lists.
+- Genre and mood need an exact match, so "intense" and "aggressive" count as totally different, and a mood that isnt in the catalog (like "sad") is just ignored.
+- A profile only holds one genre and one mood, so mixed taste isnt possible.
+- It doesnt understand lyrics, language, or what other people listen to.
 
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
+More detail in the [model card](model_card.md).
 You will go deeper on this in your model card.
 
 ---
@@ -348,10 +354,9 @@ Read and complete `model_card.md`:
 
 [**Model Card**](model_card.md)
 
-Write 1 to 2 paragraphs here about what you learned:
+A recommender turns data into predictions by comparing numbers and labels. My version just adds up points for matching genre, mood, energy and acousticness, then sorts. That simple idea still felt like a real recommender, because the reasons next to each song showed why it ranked where it did.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+Bias showed up in places I didnt expect. The tiny catalog meant the same few songs kept appearing, and the exact word matching meant a close mood still got zero points. In a real app the same thing could happen at a bigger scale, where popular songs or big genres get pushed to everyone and smaller ones never get heard. Full reflection is in the [model card](model_card.md).
 
 
 
