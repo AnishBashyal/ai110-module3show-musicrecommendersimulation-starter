@@ -61,14 +61,7 @@ Prompts:
 
 ## 6. Limitations and Bias 
 
-Where the system struggles or behaves unfairly. 
-
-Prompts:  
-
-- Features it does not consider  
-- Genres or moods that are underrepresented  
-- Cases where the system overfits to one preference  
-- Ways the scoring might unintentionally favor some users  
+The biggest weakness I found is that energy gives points to every song, even when genre and mood dont match. Gym Hero (intense pop) showed up in the top 5 for 5 out of 6 test profiles, and it still did when I turned genre off completely, so the genre weight wasnt the problem. Most of my test profiles want high energy and Gym Hero's energy is 0.93, so it always gets close to full energy points. The catalog is also small (12 of 15 genres have only one song), so after the one matching song theres not much else to pick from. This means a few high energy songs end up in front of lots of different users, which is like a mini filter bubble.
 
 ---
 
