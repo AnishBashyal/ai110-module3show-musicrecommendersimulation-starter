@@ -2,6 +2,12 @@ import csv
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 
+# points for each scoring rule (max score = sum of all four)
+GENRE_WEIGHT = 2.0
+MOOD_WEIGHT = 1.0
+ENERGY_WEIGHT = 1.0
+ACOUSTIC_WEIGHT = 0.5
+
 @dataclass
 class Song:
     """
@@ -62,25 +68,25 @@ def score_song(user_prefs: Dict, song: Dict) -> Tuple[float, List[str]]:
     score = 0.0
     reasons = []
 
-    # genre match: +2.0
+    # genre match
     if song["genre"] == user_prefs["genre"]:
-        score += 2.0
-        reasons.append("genre match (+2.0)")
+        score += GENRE_WEIGHT
+        reasons.append(f"genre match (+{GENRE_WEIGHT})")
 
-    # mood match: +1.0
+    # mood match
     if song["mood"] == user_prefs["mood"]:
-        score += 1.0
-        reasons.append("mood match (+1.0)")
+        score += MOOD_WEIGHT
+        reasons.append(f"mood match (+{MOOD_WEIGHT})")
 
-    # energy: closer to the target = more points, up to +1.0
-    energy_points = 1.0 * (1 - abs(song["energy"] - user_prefs["energy"]))
+    # energy: closer to the target = more points
+    energy_points = ENERGY_WEIGHT * (1 - abs(song["energy"] - user_prefs["energy"]))
     score += energy_points
     reasons.append(f"energy close to {user_prefs['energy']} (+{energy_points:.2f})")
 
-    # acousticness: aim for 1.0 if the user likes acoustic, 0.0 if not, up to +0.5
+    # acousticness: aim for 1.0 if the user likes acoustic, 0.0 if not
     if "likes_acoustic" in user_prefs:
         target = 1.0 if user_prefs["likes_acoustic"] else 0.0
-        acoustic_points = 0.5 * (1 - abs(song["acousticness"] - target))
+        acoustic_points = ACOUSTIC_WEIGHT * (1 - abs(song["acousticness"] - target))
         score += acoustic_points
         reasons.append(f"acousticness fit (+{acoustic_points:.2f})")
 
