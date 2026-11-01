@@ -65,13 +65,16 @@ python -m src.main
 
 ### Running Tests
 
-Run the starter tests with:
+Run all the tests with:
 
 ```bash
 pytest
 ```
 
-You can add more tests in `tests/test_recommender.py`.
+There are 23 tests in two files:
+
+- `tests/test_functions.py`: unit tests for `load_songs`, `score_song` and `recommend_songs` (each scoring rule, sorting, k, reasons), plus a few simple end to end checks with the real csv.
+- `tests/test_recommender.py`: tests for the `Recommender` class (ranking and explanations).
 
 ---
 
