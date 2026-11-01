@@ -40,7 +40,7 @@ The best possible score is 4.5. Each song also shows its reasons, like "genre ma
 
 ## 5. Strengths  
 
-- It works well when the user's genre and mood are in the catalog. Chill Lofi and Deep Intense Rock both got results that matched my gut feeling.
+- It works well when the user's genre and mood are in the catalog. Chill Lofi matched my gut feeling, and Deep Intense Rock got the right #1 (Storm Runner), though the #2 pick was off.
 - The reasons make it easy to see why a song ranked where it did.
 - Different profiles got clearly different lists, for example loud pop vs quiet lofi had no songs in common.
 
@@ -48,7 +48,7 @@ The best possible score is 4.5. Each song also shows its reasons, like "genre ma
 
 ## 6. Limitations and Bias 
 
-The biggest weakness I found is that energy gives points to every song, even when genre and mood dont match. Gym Hero (intense pop) showed up in the top 5 for 5 out of 6 test profiles, and it still did when I turned genre off completely, so the genre weight wasnt the problem. Most of my test profiles want high energy and Gym Hero's energy is 0.93, so it always gets close to full energy points. The catalog is also small (13 of 15 genres have only one song), so after the one matching song theres not much else to pick from. This means a few high energy songs end up in front of lots of different users, which is like a mini filter bubble.
+The biggest weakness I found is that energy gives points to every song, even when genre and mood dont match. Gym Hero (intense pop) showed up in the top 5 for 5 out of 6 test profiles, and it still did when I turned genre off completely, so the genre weight wasnt the problem. Most of my test profiles want high energy and Gym Hero's energy is 0.93, so it usually gets close to full energy points. The catalog is also small (13 of 15 genres have only one song), so after the one matching song theres not much else to pick from. This means a few high energy songs end up in front of lots of different users, which is like a mini filter bubble.
 
 ---
 
