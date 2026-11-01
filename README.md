@@ -344,15 +344,10 @@ So the change was mostly just different, not more accurate. It helped happy pop 
 - It doesnt understand lyrics, language, or what other people listen to.
 
 More detail in the [model card](model_card.md).
-You will go deeper on this in your model card.
 
 ---
 
 ## Reflection
-
-Read and complete `model_card.md`:
-
-[**Model Card**](model_card.md)
 
 A recommender turns data into predictions by comparing numbers and labels. My version just adds up points for matching genre, mood, energy and acousticness, then sorts. That simple idea still felt like a real recommender, because the reasons next to each song showed why it ranked where it did.
 
