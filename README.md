@@ -309,11 +309,19 @@ Top recommendations:
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+### Weight shift: energy x2, genre x0.5
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+I changed energy from 1.0 to 2.0 and genre from 2.0 to 1.0, then ran all 6 profiles. Max score stays 4.5 so the math is still fine. After testing I put the weights back to the original.
+
+What happened:
+
+- #1 song stayed the same for 5 out of 6 profiles. Strong matches (genre + mood + energy) win either way.
+- High-Energy Pop: Rooftop Lights (indie pop, happy) moved above Gym Hero (intense pop). I think this is better, since the user wants happy.
+- Deep Intense Rock: Gym Hero is still #2 and Iron Requiem (metal) is still #4. The problem there is mood words not matching ("intense" vs "aggressive"), so changing weights didnt fix it.
+- Conflicting Taste: the classical song dropped from #1 to #5 and Iron Requiem took #1, because energy now matters more than genre.
+- Scores in the middle of the list went up and got closer together (like Concrete Kings 1.42 to 2.40), so the lower picks are less clearly separated.
+
+So the change was mostly just different, not more accurate. It helped happy pop a bit but made the conflicting profile lean fully on energy.
 
 ---
 
