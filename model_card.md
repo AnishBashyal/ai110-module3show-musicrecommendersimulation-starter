@@ -67,16 +67,44 @@ The biggest weakness I found is that energy gives points to every song, even whe
 
 ## 7. Evaluation  
 
-How you checked whether the recommender behaved as expected. 
+**Profiles I tested** (top 5 for each is in the README under Profile Test Outputs):
 
-Prompts:  
+- High-Energy Pop (pop, happy, 0.8)
+- Chill Lofi (lofi, chill, 0.35, likes acoustic)
+- Deep Intense Rock (rock, intense, 0.92)
+- Sad but Energetic (pop, sad, 0.9) - made to trick it
+- Unknown Genre / k-pop (k-pop, happy, 0.8) - made to trick it
+- Conflicting Taste (classical, aggressive, 0.95, likes acoustic) - made to trick it
 
-- Which user profiles you tested  
-- What you looked for in the recommendations  
-- What surprised you  
-- Any simple tests or comparisons you ran  
+I also ran one experiment: energy x2 and genre x0.5 (details in the README). It mostly just changed the order, it didnt make things more accurate.
 
-No need for numeric metrics unless you created some.
+**What surprised me:**
+
+- Gym Hero showed up in 5 out of 6 lists, even when I turned genre off.
+- "sad" isnt a mood in my songs, so the system just ignored it and didnt say anything.
+- The Conflicting Taste user wants energy 0.95 but the #1 song is a quiet classical piece (energy 0.18), because genre and acoustic points beat the energy points.
+- Gym Hero (pop) came before Iron Requiem (metal) for the rock profile, because "intense" matched exactly and "aggressive" didnt.
+
+**Why Gym Hero keeps showing up for Happy Pop (plain version):**
+The system doesnt hear any music. It just gives points for matching labels and numbers. Gym Hero is labeled pop, so it gets the genre points, and its energy is really high so it is close to what a happy pop fan wants. The only thing it misses is the mood, because its mood is "intense" and not "happy". So it loses one point but still beats almost everything else. It's not that the system thinks Gym Hero is happy, it just doesnt have many other pop songs to pick from.
+
+**Comparing each pair of profiles:**
+
+1. Pop vs Lofi: no songs in common. Pop gets loud electronic songs, lofi gets quiet acoustic ones. Makes sense, their energy and acoustic wishes are opposite.
+2. Pop vs Rock: same three songs show up (Sunrise City, Gym Hero, Storm Runner) but in a different order. Pop's #1 is Sunrise City (genre + mood), rock's #1 is Storm Runner. Genre and mood pick the #1, energy fills the rest.
+3. Pop vs Sad: same genre, but nothing matches "sad". Sunrise City loses its mood point so Gym Hero (energy closer to 0.9) takes #1. Shows how much that one mood point was holding Sunrise City up.
+4. Pop vs k-pop: same mood and energy, but nobody is k-pop. Sunrise City stays #1 on mood, but Gym Hero falls from #2 to #4 since it lost the genre points.
+5. Pop vs Conflicting: only Gym Hero and Storm Runner overlap. Conflicting puts classical and metal on top because its genre, mood and energy all point at different songs.
+6. Lofi vs Rock: total opposites, no overlap. Quiet and acoustic vs loud and intense, as expected.
+7. Lofi vs Sad: no overlap. Same reason, low energy acoustic songs vs high energy ones.
+8. Lofi vs k-pop: no overlap. Lofi gets chill songs, k-pop gets happy upbeat ones.
+9. Lofi vs Conflicting: no overlap even though both like acoustic. Conflicting wants energy 0.95 so it still gets loud songs after the quiet classical one.
+10. Rock vs Sad: the exact same 5 songs in a different order. Both want really high energy, so the pop vs rock genre only reshuffles them.
+11. Rock vs k-pop: rock #1 is Storm Runner (intense), k-pop #1 is Sunrise City (happy). Mood is what separates them, since energy is similar.
+12. Rock vs Conflicting: both want very high energy so 4 songs overlap. Conflicting adds the classical song on top and Iron Requiem moves up to #2 because its mood is aggressive.
+13. Sad vs k-pop: Sunrise City is in both. Sad has Gym Hero #1 (pop + higher energy), k-pop has Sunrise City #1 because "happy" matches. Makes sense.
+14. Sad vs Conflicting: both want high energy, but Sad stays with loud songs while Conflicting puts a quiet classical song first. Shows that genre (+ acoustic) can beat energy.
+15. k-pop vs Conflicting: k-pop never gets a genre point so it falls back to happy upbeat songs. Conflicting does get genre and mood matches, but for totally different songs, so its list is a weird mix.
 
 ---
 
