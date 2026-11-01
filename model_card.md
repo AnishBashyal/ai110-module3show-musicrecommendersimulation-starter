@@ -33,7 +33,7 @@ The best possible score is 4.5. Each song also shows its reasons, like "genre ma
 
 - 18 songs in data/songs.csv (10 from the starter, 8 I added).
 - Each song has genre, mood, energy, tempo, valence, danceability and acousticness. Only genre, mood, energy and acousticness are used for scoring.
-- 15 genres and 14 moods, but 12 of the 15 genres have only one song. Lofi has 3.
+- 15 genres and 14 moods, but 13 of the 15 genres have only one song. Lofi has 3.
 - Missing: lyrics, language, artist popularity, decade, and what other people listen to. The data is made up, so it doesnt reflect real music taste.
 
 ---
@@ -48,7 +48,7 @@ The best possible score is 4.5. Each song also shows its reasons, like "genre ma
 
 ## 6. Limitations and Bias 
 
-The biggest weakness I found is that energy gives points to every song, even when genre and mood dont match. Gym Hero (intense pop) showed up in the top 5 for 5 out of 6 test profiles, and it still did when I turned genre off completely, so the genre weight wasnt the problem. Most of my test profiles want high energy and Gym Hero's energy is 0.93, so it always gets close to full energy points. The catalog is also small (12 of 15 genres have only one song), so after the one matching song theres not much else to pick from. This means a few high energy songs end up in front of lots of different users, which is like a mini filter bubble.
+The biggest weakness I found is that energy gives points to every song, even when genre and mood dont match. Gym Hero (intense pop) showed up in the top 5 for 5 out of 6 test profiles, and it still did when I turned genre off completely, so the genre weight wasnt the problem. Most of my test profiles want high energy and Gym Hero's energy is 0.93, so it always gets close to full energy points. The catalog is also small (13 of 15 genres have only one song), so after the one matching song theres not much else to pick from. This means a few high energy songs end up in front of lots of different users, which is like a mini filter bubble.
 
 ---
 
@@ -105,7 +105,7 @@ The system doesnt hear any music. It just gives points for matching labels and n
 
 ## 9. Personal Reflection  
 
-**Biggest learning moment:** The data limits the system a lot. My scoring rules were simple, but with only 18 songs (and 12 of 15 genres having just one song) there werent many real choices, so the same few songs kept showing up. Gym Hero was in 5 out of 6 lists even when I turned genre off. A better formula wouldnt fix that, I would need more songs.
+**Biggest learning moment:** The data limits the system a lot. My scoring rules were simple, but with only 18 songs (and 13 of 15 genres having just one song) there werent many real choices, so the same few songs kept showing up. Gym Hero was in 5 out of 6 lists even when I turned genre off. A better formula wouldnt fix that, I would need more songs.
 
 **How AI helped, and when I double-checked it:** AI helped me build each step fast, like the scoring code, the test profiles and writing up the results. But I had to double-check it when it mixed up numbers and versions. It told me Gym Hero was in the top 2 for 4 profiles when it was really 3, and it mixed results from the experiment weights with the original weights. I asked it to redo the analysis and say which version each number came from, and the corrected numbers are the ones in my model card.
 
