@@ -77,11 +77,12 @@ You can add more tests in `tests/test_recommender.py`.
 
 ## Sample Recommendation Output
 
-Output for the default pop/happy profile (`python -m src.main`):
+Output for the High-Energy Pop profile (`python -m src.main`):
 
 ```
 Loaded songs: 18
 
+=== High-Energy Pop ===
 User profile: {'genre': 'pop', 'mood': 'happy', 'energy': 0.8, 'likes_acoustic': False}
 
 Top recommendations:
@@ -109,6 +110,199 @@ Top recommendations:
 5. Storm Runner by Voltline - Score: 1.34
    - energy close to 0.8 (+0.89)
    - acousticness fit (+0.45)
+```
+
+---
+
+## Profile Test Outputs
+
+Top 5 for each test profile (`python -m src.main` runs all of them). The first three are normal profiles, the last three are adversarial ones made to try to trick the scoring.
+
+### High-Energy Pop
+
+```
+User profile: {'genre': 'pop', 'mood': 'happy', 'energy': 0.8, 'likes_acoustic': False}
+
+Top recommendations:
+
+1. Sunrise City by Neon Echo - Score: 4.39
+   - genre match (+2.0)
+   - mood match (+1.0)
+   - energy close to 0.8 (+0.98)
+   - acousticness fit (+0.41)
+
+2. Gym Hero by Max Pulse - Score: 3.35
+   - genre match (+2.0)
+   - energy close to 0.8 (+0.87)
+   - acousticness fit (+0.47)
+
+3. Rooftop Lights by Indigo Parade - Score: 2.29
+   - mood match (+1.0)
+   - energy close to 0.8 (+0.96)
+   - acousticness fit (+0.33)
+
+4. Concrete Kings by Blockhead Sam - Score: 1.42
+   - energy close to 0.8 (+0.98)
+   - acousticness fit (+0.44)
+
+5. Storm Runner by Voltline - Score: 1.34
+   - energy close to 0.8 (+0.89)
+   - acousticness fit (+0.45)
+```
+
+### Chill Lofi
+
+```
+User profile: {'genre': 'lofi', 'mood': 'chill', 'energy': 0.35, 'likes_acoustic': True}
+
+Top recommendations:
+
+1. Library Rain by Paper Lanterns - Score: 4.43
+   - genre match (+2.0)
+   - mood match (+1.0)
+   - energy close to 0.35 (+1.00)
+   - acousticness fit (+0.43)
+
+2. Midnight Coding by LoRoom - Score: 4.29
+   - genre match (+2.0)
+   - mood match (+1.0)
+   - energy close to 0.35 (+0.93)
+   - acousticness fit (+0.35)
+
+3. Focus Flow by LoRoom - Score: 3.34
+   - genre match (+2.0)
+   - energy close to 0.35 (+0.95)
+   - acousticness fit (+0.39)
+
+4. Spacewalk Thoughts by Orbit Bloom - Score: 2.39
+   - mood match (+1.0)
+   - energy close to 0.35 (+0.93)
+   - acousticness fit (+0.46)
+
+5. Coffee Shop Stories by Slow Stereo - Score: 1.43
+   - energy close to 0.35 (+0.98)
+   - acousticness fit (+0.45)
+```
+
+### Deep Intense Rock
+
+```
+User profile: {'genre': 'rock', 'mood': 'intense', 'energy': 0.92, 'likes_acoustic': False}
+
+Top recommendations:
+
+1. Storm Runner by Voltline - Score: 4.44
+   - genre match (+2.0)
+   - mood match (+1.0)
+   - energy close to 0.92 (+0.99)
+   - acousticness fit (+0.45)
+
+2. Gym Hero by Max Pulse - Score: 2.46
+   - mood match (+1.0)
+   - energy close to 0.92 (+0.99)
+   - acousticness fit (+0.47)
+
+3. Neon Overdrive by Pulse Theory - Score: 1.45
+   - energy close to 0.92 (+0.96)
+   - acousticness fit (+0.48)
+
+4. Iron Requiem by Black Cathedral - Score: 1.42
+   - energy close to 0.92 (+0.94)
+   - acousticness fit (+0.48)
+
+5. Sunrise City by Neon Echo - Score: 1.31
+   - energy close to 0.92 (+0.90)
+   - acousticness fit (+0.41)
+```
+
+### Sad but Energetic
+
+```
+User profile: {'genre': 'pop', 'mood': 'sad', 'energy': 0.9, 'likes_acoustic': False}
+
+Top recommendations:
+
+1. Gym Hero by Max Pulse - Score: 3.44
+   - genre match (+2.0)
+   - energy close to 0.9 (+0.97)
+   - acousticness fit (+0.47)
+
+2. Sunrise City by Neon Echo - Score: 3.33
+   - genre match (+2.0)
+   - energy close to 0.9 (+0.92)
+   - acousticness fit (+0.41)
+
+3. Storm Runner by Voltline - Score: 1.44
+   - energy close to 0.9 (+0.99)
+   - acousticness fit (+0.45)
+
+4. Neon Overdrive by Pulse Theory - Score: 1.43
+   - energy close to 0.9 (+0.94)
+   - acousticness fit (+0.48)
+
+5. Iron Requiem by Black Cathedral - Score: 1.40
+   - energy close to 0.9 (+0.92)
+   - acousticness fit (+0.48)
+```
+
+### Unknown Genre (k-pop)
+
+```
+User profile: {'genre': 'k-pop', 'mood': 'happy', 'energy': 0.8, 'likes_acoustic': False}
+
+Top recommendations:
+
+1. Sunrise City by Neon Echo - Score: 2.39
+   - mood match (+1.0)
+   - energy close to 0.8 (+0.98)
+   - acousticness fit (+0.41)
+
+2. Rooftop Lights by Indigo Parade - Score: 2.29
+   - mood match (+1.0)
+   - energy close to 0.8 (+0.96)
+   - acousticness fit (+0.33)
+
+3. Concrete Kings by Blockhead Sam - Score: 1.42
+   - energy close to 0.8 (+0.98)
+   - acousticness fit (+0.44)
+
+4. Gym Hero by Max Pulse - Score: 1.34
+   - energy close to 0.8 (+0.87)
+   - acousticness fit (+0.47)
+
+5. Storm Runner by Voltline - Score: 1.34
+   - energy close to 0.8 (+0.89)
+   - acousticness fit (+0.45)
+```
+
+### Conflicting Taste
+
+```
+User profile: {'genre': 'classical', 'mood': 'aggressive', 'energy': 0.95, 'likes_acoustic': True}
+
+Top recommendations:
+
+1. Moonlit Sonata Redux by Elise Varga - Score: 2.71
+   - genre match (+2.0)
+   - energy close to 0.95 (+0.23)
+   - acousticness fit (+0.48)
+
+2. Iron Requiem by Black Cathedral - Score: 1.99
+   - mood match (+1.0)
+   - energy close to 0.95 (+0.97)
+   - acousticness fit (+0.02)
+
+3. Storm Runner by Voltline - Score: 1.01
+   - energy close to 0.95 (+0.96)
+   - acousticness fit (+0.05)
+
+4. Gym Hero by Max Pulse - Score: 1.01
+   - energy close to 0.95 (+0.98)
+   - acousticness fit (+0.03)
+
+5. Neon Overdrive by Pulse Theory - Score: 1.00
+   - energy close to 0.95 (+0.99)
+   - acousticness fit (+0.02)
 ```
 
 ---
