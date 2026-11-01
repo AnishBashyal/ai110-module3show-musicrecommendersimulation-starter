@@ -4,6 +4,8 @@ Command line runner for the Music Recommender Simulation.
 Loads the songs, then prints the top 5 recommendations for each test profile.
 """
 
+from tabulate import tabulate
+
 from src.recommender import load_songs, recommend_songs
 
 # normal profiles
@@ -28,12 +30,13 @@ def main() -> None:
         print(f"\n=== {name} ===")
         print(f"User profile: {user_prefs}")
         print("\nTop recommendations:\n")
-        for i, (song, score, explanation) in enumerate(recommendations, start=1):
-            print(f"{i}. {song['title']} by {song['artist']} - Score: {score:.2f}")
-            # one reason per line so it's easy to read
-            for reason in explanation.split("; "):
-                print(f"   - {reason}")
-            print()
+        # one row per song, with each reason on its own line in the last column
+        rows = [
+            [i, song["title"], song["artist"], score, explanation.replace("; ", "\n")]
+            for i, (song, score, explanation) in enumerate(recommendations, start=1)
+        ]
+        print(tabulate(rows, headers=["#", "Song", "Artist", "Score", "Why"], tablefmt="grid", floatfmt=".2f"))
+        print()
 
 
 if __name__ == "__main__":
