@@ -2,32 +2,41 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
+This project is a small music recommendation system, made to show how apps like spotify or tiktok guess what songs you'll like next. It's a simulation, so it runs on a tiny csv of songs instead of real data, and it runs in the terminal.
 
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
+It's content based, meaning it looks at the songs themselves. It reads the songs from the csv, compares each one to a user's taste (genre, mood, energy, acousticness), gives it a score, and shows the top matches with reasons why.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
+Real apps like spotify and youtube mostly use two things. One is collaborative filtering, which looks at what other people with similar taste liked (likes, skips, playlists). The other is content based, which looks at the song itself (genre, mood, tempo, energy). My version is only content based, since I dont have any other users. It just compares a song's features to what one user says they like, and gives it a score.
 
-Some prompts to answer:
+My version cares most about genre, then mood, then how close the energy is. I also look at acousticness a little.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+**Song features:** genre, mood, energy, acousticness (the csv also has tempo, valence, danceability but I'm not scoring those)
 
-You can include a simple diagram or bullet list if helpful.
+**UserProfile features:** favorite genre, favorite mood, target energy, likes acoustic (yes/no)
+
+### Algorithm Recipe
+
+Every song in the csv gets a score, then I sort them and show the top K. Points for each song:
+
+- genre matches: +2.0
+- mood matches: +1.0
+- energy closeness: up to +1.0, using `1 - |song energy - target energy|` (closer = more points, not just higher)
+- acousticness closeness: up to +0.5 (goes toward 1.0 if user likes acoustic, toward 0.0 if not)
+
+Max score is 4.5. Each point comes with a reason like "genre match (+2.0)" so you can see why a song was picked.
+
+Flow: user prefs → loop over every song and score it → sort high to low → top K with reasons.
+
+### Expected Biases
+
+- Genre is worth the most, so it might push out songs that match the mood and energy but are a different genre. Gym Hero (intense pop) will probably keep showing up for pop users even if they want happy.
+- Genre and mood need an exact match. "indie pop" gets nothing for a "pop" user even though its close.
+- Profile only holds one genre and one mood, so someone who likes a mix gets ignored.
+- Catalog is small (18 songs) and some genres only have 1 song, so results wont have much variety.
 
 ---
 
