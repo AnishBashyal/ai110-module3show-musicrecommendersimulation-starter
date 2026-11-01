@@ -1,7 +1,6 @@
 import csv
-from dataclasses import asdict
+from dataclasses import asdict, dataclass
 from typing import List, Dict, Tuple, Optional
-from dataclasses import dataclass
 
 # points for each scoring rule (max score = sum of all four)
 GENRE_WEIGHT = 2.0
